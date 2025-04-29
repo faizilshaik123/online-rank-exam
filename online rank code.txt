@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 70        //it is used for max marks should students can be secured
+
+// Define the Student structure
+typedef struct {
+    char name[50];
+    float score;
+} Student;
+
+// the main logic or function part to the code  based on arrangement of students in descending order 
+void sortDescending(Student students[], int n) {
+    Student temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (students[i].score < students[j].score) {
+                // Swapping of their prespective marks theobubble sort
+                temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    Student students[MAX];
+    int n;
+
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    // wants to give the data of students 
+    for (int i = 0; i < n; i++) {
+        printf("Enter name of student %d: ", i + 1);
+        scanf("%s", students[i].name);
+        printf("Enter score of %s: ", students[i].name);
+        scanf("%f", &students[i].score);
+    }
+
+    // Sort the students based on their perspective ranks in descending order.
+    sortDescending(students, n);
+
+    // the atudents list of their perspective ranks
+    printf("\n--- Rank List ---\n");
+    for (int i = 0; i < n; i++) {
+        printf("Rank %d: %s - %.2f\n", i + 1, students[i].name, students[i].score);
+    }
+
+    return 0;
+}
